@@ -18,7 +18,7 @@ function App() {
     const formData = new FormData();
     formData.append("file", blob, "sketch.png");
 
-    const response = await fetch("http://localhost:3000/upload-sketch/", {
+    const response = await fetch("http://localhost:8000/upload-sketch/", {
       method: "POST",
       body: formData,
     });
