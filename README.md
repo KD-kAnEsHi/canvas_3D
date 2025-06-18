@@ -6,7 +6,13 @@ canvas3D/
 │   ├── outputs/
 │   ├── api.py
 │   └── main.py
-├── ml/
+├── ml/ 
+|    └── models/
+│   │   ├── magic3dsketch_model.py   
+│   │   ├── layers.py                
+│   │   ├── losses.py                
+│   │   └── utils.py  
+│   │
 │   ├── models/
 │   ├── train.py
 │   └── inference.py
