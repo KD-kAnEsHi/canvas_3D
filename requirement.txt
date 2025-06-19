@@ -1,2 +1,5 @@
 install fastapi uvicorn pillow python-multipart
 open3D
+
+
+pip install pyrender
