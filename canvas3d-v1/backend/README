@@ -1,0 +1,26 @@
+About Thingi10K
+===============
+
+Thingi10K is a large scale 3D dataset created to study the variety, complexity
+and quality of real-world 3D printing models. We analyze every mesh of all
+things featured on Thingiverse.com between Sept. 16, 2009 and Nov. 15, 2015. On
+this site, we hope to share our findings with you.
+
+Summary
+=======
+
+Total number of files: 10,000
+
+STL files: 9956
+OBJ files: 42
+PLY files: 1
+OFF files: 1
+
+Naming convention: {file_id}.{ext}
+
+Each file can also be downloaded directly from Thingiverse.com using the
+following url: http://www.thingiverse.com/download:{file_id}
+
+One can browse all models through our online interface:
+https://ten-thousand-models.appspot.com
+

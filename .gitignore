@@ -1,4 +1,6 @@
-data/
+canvas3d-v1/backend/output
+canvas3d-v1/backend/input
+canvas3d-v1/backend/rendered
 *.tar.gz
 *.DS_Store
 __pycache__/

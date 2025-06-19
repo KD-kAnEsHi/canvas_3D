@@ -1,0 +1,5 @@
+# config.py
+
+IMAGE_WEIGHT = 0.4
+TEXT_WEIGHT = 0.4
+STYLE_WEIGHT = 0.2

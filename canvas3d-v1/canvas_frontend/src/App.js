@@ -20,16 +20,17 @@ function App() {
 
     const formData = new FormData();
     formData.append("file", blob, "sketch.png");
-    formData.append("description", `${style} style: ${description}`);
+    formData.append("description", description);  // send separately
+    formData.append("style", style);              // send separately
 
-    const response = await fetch("http://localhost:8000/upload-sketch/", {
+    const response = await fetch("http://localhost:3000/upload-sketch/", {
       method: "POST",
       body: formData,
     });
 
     const result = await response.json();
     if (result.model_url) {
-      const fullUrl = `http://localhost:8000${result.model_url}`;
+      const fullUrl = `http://localhost:3000${result.model_url}`;
       console.log("Received model URL:", fullUrl);
       setModelUrl(fullUrl);
     } else {
@@ -45,7 +46,7 @@ function App() {
         ref={canvasRef}
         strokeWidth={3}
         strokeColor="black"
-        style={{ border: "1px solid #000", width: 1850, height: 800 }}
+        style={{ border: "1px solid #000", width: 850, height: 600 }}
       />
 
       <div style={{ marginTop: 15 }}>
@@ -84,8 +85,8 @@ function App() {
 
       <div style={{ marginTop: 34 }}>
         <h2>3D Model Viewer</h2>
-        <ModelViewer modelUrl={modelUrl}
-        style={{ border: "1px solid #000", width: 1850, height: 900 }} />
+        {/* ModelViewer is always shown, even if modelUrl is null */}
+        <ModelViewer modelUrl={modelUrl} style={{ border: "1px solid #000", width: 850, height: 600 }} />
       </div>
     </div>
   );
