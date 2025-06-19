@@ -1,33 +1,37 @@
-# Using Fast API as the main API
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
-
-from PIL import Image 
-import io
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+import shutil
 import os
-from datetime import datetime
+import uuid
 
 app = FastAPI()
 
+# Allow React frontend to access the backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = ["http://localhost:3000"],
-    allow_credentials = True,
-    allow_methods = ["*"],
-    allow_headers = ["*"],
+    allow_origins=["http://localhost:3000"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-os.makedirs("uploads", exist_ok=True)
+# app.mount("../", StaticFiles(directory="models"), name="models")
 
 @app.post("/upload-sketch/")
-async def upload_sketch(file: UploadFile = File(...)):
-    try:
-        contents = await file.read()
-        image = Image.open(io.BytesIO(contents))
-        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-        filename = f"uploads/sketch-{timestamp}.png"
-        image.save(filename)
-        return {"message": f"sketch saved as {filename}"}
+async def upload_sketch(file: UploadFile, description: str = Form(...)):
+    print("Received description:", description)
 
-    except Exception as e:
-        return { "error": str[e]}
+    uploads_dir = "uploads"
+    os.makedirs(uploads_dir, exist_ok=True)
+    sketch_path = os.path.join(uploads_dir, file.filename)
+
+    with open(sketch_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    # TODO: Replace this with real model generation
+    dummy_model_filename = "32770.stl"
+    model_path = f"../canvas_3D/data/Thingi10K/raw_meshes/{dummy_model_filename}"
+
+    return JSONResponse(content={"model_url": model_path})
