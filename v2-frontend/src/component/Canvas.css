@@ -1,18 +1,96 @@
 .canvas-container {
-
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding-bottom: 50px;
 }
 
 
 .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 24px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #f0f4f8;
+    border: 1px solid #dce3ec;
+}
+
+
+.controls > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+    justify-content: center;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 
 }
 
 
-.button-row{
-
+.controls label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #2a2a2a;
 }
 
+
+.controls input[type="color"],
+.controls input[type="file"] {
+  border: none;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.controls input[type="range"] {
+  accent-color: #4f46e5;
+}
+
+
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.button-row button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #000000;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.button-row button:hover {
+  background-color: #3730a3;
+}
 
 .canvas {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
 
+.canvas:hover {
+  border-color: #4f46e5;
 }

@@ -3,7 +3,7 @@ import React, { useRef, useState }  from "react";
 import '../component/Canvas.css'
 
 export default function Canvas () {
-    const canvasRef = useRef<ReactSketchCanvasRef>(null);
+    const canvasRef = useRef();
     const [eraserMode, setEraser] = useState(false);
     const [backgroundColor, setBackgroundColor] = useState("#ffffff");
     const [backgroundImage, setBackgroundImage] = useState(null);
@@ -12,22 +12,28 @@ export default function Canvas () {
     const [strokeWidth, setStrokeWidth] = useState(5);
     const [eraserWidth, setEraserWidth] = useState(10);
 
-    /* const handleEraserMode(prop) {
-            if 
-    } */ 
+    const toggleEraserMode = () => {
+        if (backgroundImage) {
+            alert("Eraser doesn't work with background images. Please remove the background image first.");
+            return;
+        }
+        const nextMode = !eraserMode;
+        setEraser(nextMode);
+        canvasRef.current.eraseMode(nextMode);
+    };
 
     const handleExport = async () => {
         const dataUrl = await canvasRef.current.exportImage("png");
         const blop = await (await fetch(dataUrl)).blob();
         setImageBlob(blop);
-    }
+    };
 
     const handlImage = (e) => {
         const file = e.target.files[0];
         if (!file) return;
         const url = URL.createObjectURL(file);
         setBackgroundImage(url)
-    }
+    };
 
     return (
         <div className="canvas-container">
@@ -58,24 +64,39 @@ export default function Canvas () {
                 <button onClick={() => canvasRef.current.clearCanvas()}>
                     Clear
                 </button>
-                <button onClick={() => canvasRef.current.resetCanvas()}>
+
+                <button onClick={() => {
+                    canvasRef.current.resetCanvas();
+                    setBackgroundImage(null);
+                    setBackgroundColor("#ffffff");
+                }}>
                     Reset
                 </button>
+
                 <button onClick={() => canvasRef.current.undo()}>
                     Undo
                 </button>
+
                 <button onClick={() => canvasRef.current.redo()}>
                     Redo
                 </button>
-                <button onClick={ToggleEvent}>
-                    {eraserMode ? "Draw Mode" : "Eraser Mode"}
+
+                <button onClick={toggleEraserMode}>
+                    {eraserMode ? "Switch to Draw" : "Switch to Erase"}
+                </button>
+
+                <button onClick={() =>{
+                    setBackgroundImage(null);
+                    setBackgroundColor("#ffffff");
+                }} >
+                    Remove Background Image
                 </button>
             </div>
 
             <ReactSketchCanvas 
                 className="canvas"
                 ref={canvasRef}
-                width="1000px"
+                width="100%"
                 height="1000px"
                 strokeColor={strokeColor}
                 strokeWidth={strokeWidth}
@@ -85,5 +106,5 @@ export default function Canvas () {
                 eraser={eraserMode}
             />
         </div>
-    )
+    );
 }
