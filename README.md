@@ -11,3 +11,13 @@ canvas3D-v2: current iteration
 
 
 # React-FastAPI-Flask
+
+install:
+node.js
+
+npm
+
+
+How to use:
+cd. v2-frontend
+command: npm run dev
