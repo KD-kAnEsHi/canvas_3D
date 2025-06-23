@@ -5,9 +5,7 @@
     background-color: #ffffff;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    padding-bottom: 50px;
 }
-
 
 .controls {
     display: flex;
@@ -15,13 +13,12 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 24px;
+    margin-bottom: 25px;
     padding: 16px;
     border-radius: 12px;
     background-color: #f0f4f8;
     border: 1px solid #dce3ec;
 }
-
 
 .controls > div {
     display: flex;
@@ -31,32 +28,26 @@
     padding: 12px;
     border-radius: 10px;
     background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
-
 
 .controls label {
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-align: center;
   color: #2a2a2a;
 }
 
-
 .controls input[type="color"],
 .controls input[type="file"] {
-  border: none;
   cursor: pointer;
-  padding: 6px 0;
+  padding: 0;
 }
 
 .controls input[type="range"] {
   accent-color: #4f46e5;
 }
-
-
 
 .button-row {
   display: flex;
@@ -94,3 +85,4 @@
 .canvas:hover {
   border-color: #4f46e5;
 }
+

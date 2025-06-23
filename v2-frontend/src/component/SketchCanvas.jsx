@@ -1,8 +1,9 @@
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import React, { useRef, useState }  from "react";
-import '../component/Canvas.css'
+import TextInput from "./Description";
+import '../component/SketchCanvas.css'
 
-export default function Canvas () {
+export default function SketchCanvas ({setImageBlob, description, setDescription}) {
     const canvasRef = useRef();
     const [eraserMode, setEraser] = useState(false);
     const [backgroundColor, setBackgroundColor] = useState("#ffffff");
@@ -55,7 +56,7 @@ export default function Canvas () {
                     <input type="color" value={backgroundColor} onChange={(e) => setBackgroundColor(e.target.value)}/>
                 </div>
                 <div>
-                    <label>Backgroung Image: </label>
+                    <label>Image: </label>
                     <input type="file" accept="image/*" onChange={handlImage}/>
                 </div>
             </div>
@@ -97,7 +98,7 @@ export default function Canvas () {
                 className="canvas"
                 ref={canvasRef}
                 width="100%"
-                height="1000px"
+                height="800px"
                 strokeColor={strokeColor}
                 strokeWidth={strokeWidth}
                 eraserWidth={eraserWidth}
@@ -105,6 +106,8 @@ export default function Canvas () {
                 backgroundImage={backgroundImage}
                 eraser={eraserMode}
             />
+
+            <TextInput value={description} setValue={setDescription} />
         </div>
     );
 }

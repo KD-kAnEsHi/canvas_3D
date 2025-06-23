@@ -1,0 +1,27 @@
+/* Text Description Style */
+.text-input {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.text-input textarea {
+  width: 80%;
+  max-width: 1000px;
+  padding: 10px;
+  height: 20px;
+  font-size: 18px;
+  font-family: 'Segoe UI', sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  resize: vertical;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.text-input textarea:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
