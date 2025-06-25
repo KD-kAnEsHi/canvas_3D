@@ -2,14 +2,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, UploadFile, File, Form
 from pathlib import Path
 import uuid
+from PIL import Image
+import torch 
+from torchvision import transforms
 
 app = FastAPI()
 
-# CORS configuration - moved right after app creation
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],  # frontend link
-    allow_credentials=True,  # Added this line
+    allow_credentials=True,  
     allow_methods=["*"],
     allow_headers=["*"],
 )
