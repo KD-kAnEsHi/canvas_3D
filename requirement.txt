@@ -2,6 +2,26 @@ install fastapi uvicorn pillow python-multipart
 open3D
 
 
-pip install pyrender
+cd  ./v2-frontend
+    npm run dev
 
+cd ./v2-backend
+    uvicorn main:app --reload
+
+fastapi
+uvicorn
+python multipart
+
+
+
+pip install fastapi uvicorn python-multipart
+pip install pyrender
 npm install react-sketch-canvas
+
+
+dataset:
+pip install huggingface_hub objaverse
+pip install trimesh
+
+
+
