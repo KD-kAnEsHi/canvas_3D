@@ -21,3 +21,7 @@ npm
 How to use:
 cd. v2-frontend
 command: npm run dev
+
+
+pip install git+https://github.com/openai/point-e
+pip install fastapi uvicorn python-multipart pillow torch trimesh
