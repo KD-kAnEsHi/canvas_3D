@@ -12,7 +12,6 @@ function App() {
   const handleGenerate = async () => {
     if (!sketchRef.current) return;
     
-    // Await the blob returned by exportSketch
     const blob = await sketchRef.current.exportSketch();
     setImageBlob(blob);
     

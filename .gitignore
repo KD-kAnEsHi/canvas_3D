@@ -1,6 +1,9 @@
 canvas3D-v1/backend/output
 canvas3D-v1/backend/input
-canvas3D-v2/v2-backend/
+static/
+point_e_model_cache/
+uploads/
+point_e_model_cache/
 canvas3D-v1/backend/rendered
 *.tar.gz
 *.DS_Store
