@@ -1,40 +1,49 @@
-import { useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import SketchCanvas from './component/SketchCanvas.jsx';
 import ModelViewer from './component/ModelViewer.jsx';
-import './App.css'
+import './App.css';
 
 function App() {
   const [description, setDescription] = useState("");
   const [imageBlob, setImageBlob] = useState(null);
-  const [modelUrl, setModelUrl] = useState(null);
+  const [sketchModelUrl, setSketchModelUrl] = useState(null);
+  const [textModelUrl, setTextModelUrl] = useState(null);
   const sketchRef = useRef();
 
   const handleGenerate = async () => {
     if (!sketchRef.current) return;
-    
+
     const blob = await sketchRef.current.exportSketch();
     setImageBlob(blob);
-    
+
     if (!description.trim() || !blob) {
       alert("Please sketch and type a description before generating.");
       return;
     }
-    
-    const formData = new FormData();
-    formData.append("image", blob, "sketch.png");
-    formData.append("description", description);
-    
+
     try {
-      const res = await fetch("http://localhost:8000/generate", { // CHANGED FROM 5000 TO 8000
+      // send  the sketch to backend
+      const sketchForm = new FormData();
+      sketchForm.append("image", blob, "sketch.png");
+      const sketchRes = await fetch("http://localhost:8000/generate/sketch", {
         method: "POST",
-        body: formData,
+        body: sketchForm,
       });
-      const result = await res.json();
-      setModelUrl(result.model_url);
-      console.log(result.model_url);
+      const sketchResult = await sketchRes.json();
+      setSketchModelUrl(sketchResult.model_url);
+
+      // send the description to backend
+      const textRes = await fetch("http://localhost:8000/generate/text", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description }),
+      });
+      const textResult = await textRes.json();
+      setTextModelUrl(textResult.model_url);
+
     } catch (err) {
-      console.log("Error: ", err);
-      alert("failed to generate model.");
+      console.error("Error during generation:", err);
+      alert("Failed to generate one or both models.");
     }
   };
 
@@ -49,12 +58,25 @@ function App() {
           setDescription={setDescription}
         />
         <div className='generate-button'>
-          <button onClick={handleGenerate} > Generate 3D Model </button>
+          <button onClick={handleGenerate}>Generate 3D Model</button>
         </div>
-        {modelUrl || true ? <ModelViewer url={modelUrl} /> : null}
+        <div className="model-viewers">
+          {sketchModelUrl && (
+            <div>
+              <h3>Model from Sketch</h3>
+              <ModelViewer url={sketchModelUrl} />
+            </div>
+          )}
+          {textModelUrl && (
+            <div>
+              <h3>Model from Text</h3>
+              <ModelViewer url={textModelUrl} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
